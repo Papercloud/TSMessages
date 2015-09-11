@@ -447,7 +447,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
                 navigationController = (UINavigationController *)self.viewController;
             }
             BOOL isNavBarIsHidden = !navigationController || [TSMessage isNavigationBarInNavigationControllerHidden:navigationController];
-            BOOL isNavBarIsOpaque = !navigationController.navigationBar.isTranslucent && navigationController.navigationBar.alpha == 1;
+            BOOL isNavBarIsOpaque = NO;
             
             if (isNavBarIsHidden || isNavBarIsOpaque) {
                 topOffset = -30.f;
