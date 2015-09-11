@@ -266,15 +266,14 @@ __weak static UIViewController *_defaultViewController;
     {
         [self.delegate customizeMessageView:currentView];
     }
-    
-    
-    
+	
+	currentView.alpha = 0.0;
+	currentView.center = toPoint;
+	
     dispatch_block_t animationBlock = ^{
-        currentView.center = toPoint;
-        if (![TSMessage iOS7StyleEnabled]) {
-            currentView.alpha = TSMessageViewAlpha;
-        }
+        currentView.alpha = TSMessageViewAlpha;
     };
+	
     void(^completionBlock)(BOOL) = ^(BOOL finished) {
         currentView.messageIsFullyDisplayed = YES;
     };
@@ -289,9 +288,7 @@ __weak static UIViewController *_defaultViewController;
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
         [UIView animateWithDuration:kTSMessageAnimationDuration + 0.1
                               delay:0
-             usingSpringWithDamping:0.8
-              initialSpringVelocity:0.f
-                            options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction
+                            options:0
                          animations:animationBlock
                          completion:completionBlock];
 #endif
@@ -349,10 +346,8 @@ __weak static UIViewController *_defaultViewController;
     
     [UIView animateWithDuration:kTSMessageAnimationDuration animations:^
      {
-         currentView.center = fadeOutToPoint;
-         if (![TSMessage iOS7StyleEnabled]) {
-             currentView.alpha = 0.f;
-         }
+         currentView.alpha = 0.f;
+		 
      } completion:^(BOOL finished)
      {
          [currentView removeFromSuperview];
