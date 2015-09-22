@@ -43,7 +43,7 @@ static NSMutableDictionary *_notificationDesign;
 @property (nonatomic, strong) UIButton *button;
 @property (nonatomic, strong) UIView *borderView;
 @property (nonatomic, strong) UIImageView *backgroundImageView;
-@property (nonatomic, strong) TSBlurView *backgroundBlurView; // Only used in iOS 7
+@property (nonatomic, strong) UIView *backgroundBlurView; // Only used in iOS 7
 
 @property (nonatomic, assign) CGFloat textSpaceLeft;
 @property (nonatomic, assign) CGFloat textSpaceRight;
@@ -179,9 +179,9 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         else
         {
             // On iOS 7 and above use a blur layer instead (not yet finished)
-            _backgroundBlurView = [[TSBlurView alloc] init];
-            self.backgroundBlurView.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
-            self.backgroundBlurView.blurTintColor = [UIColor colorWithHexString:current[@"backgroundColor"]];
+			_backgroundBlurView = [[UIView alloc] init];
+			self.backgroundBlurView.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
+			self.backgroundBlurView.backgroundColor = [UIColor colorWithHexString:current[@"backgroundColor"]];
             [self addSubview:self.backgroundBlurView];
         }
         
